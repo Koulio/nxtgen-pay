@@ -1,0 +1,8 @@
+OBJECT Globals AS in.pymnt.Globals
+WITH  Globals
+  SET MMID = "1234567"
+END WITH
+
+OBJECT TestGlobals  AS  in.pymnt.pay.test.TestGlobals 
+
+RUN TestGlobals

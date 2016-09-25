@@ -1,0 +1,35 @@
+REM 25-Jul-2016 , Ashish Banerjee
+; Random Load Generation with Berkley DB 
+;
+
+OBJECT Globals AS in.pymnt.Globals
+WITH  Globals
+  SET MMID = "1234567"
+END WITH
+
+OBJECT EnvInfo AS in.pymnt.pay.je.EnvInfo
+WITH EnvInfo
+    SET envHome = "/home/ashish/xbdb/10k"
+END WITH
+
+; Berkley DB Java Edition (BDB JE)
+OBJECT JeTxnFactory AS in.pymnt.pay.je.JeTxnFactory
+WITH JeTxnFactory
+   SET envInfo = EnvInfo
+END WITH
+
+OBJECT MemLoadRandom AS in.pymnt.pay.test.MemLoadRandom
+WITH MemLoadRandom
+    SET recordsToCreate = 10000
+    SET firstMobileNo = "9810000000"
+    SET initialAmount = 200
+END WITH
+
+; Load gen main class
+OBJECT RandomLoader AS in.pymnt.pay.test.RandomLoader
+WITH RandomLoader
+    SET txnFact = JeTxnFactory
+    SET loader =  MemLoadRandom
+END WITH
+RUN RandomLoader
+

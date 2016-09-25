@@ -1,0 +1,9 @@
+= PYMNT: Micro Payment Wallet
+
+This is a Micro Payment Wallet for Telecom Semi Closed & closed payment instruments and Loyalty points. 
+
+This project uses core Java only; No Java EE EJB used. Rather,it uses generic beans and Inversion of Control patterns.
+
+To assemble the beans, it uses https://github.com/qzip/atm/wiki/BDL:-Bean-Deployment-Language[BDL, Bean Deployment Language].
+
+
