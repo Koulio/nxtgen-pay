@@ -1,0 +1,886 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Indian Independence Banking</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Indian Independence Banking</h1>
+<span id="author">Ashish Banerjee</span><br />
+<span id="email"><code>&lt;<a href="mailto:ashish@qzip.in">ashish@qzip.in</a>&gt;</code></span><br />
+<span id="revnumber">version 0.01,</span>
+<span id="revdate">2016-08-15</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>This Financial Technology (FinTech) note proposes a next generation banking system architecture based on Blockchain Technology.</p></div>
+<div class="paragraph"><p>The urban Sec-A population are over-banked with multiple financial instruments across multiple delivery channels, even while 40% of the population are financially excluded.</p></div>
+<div class="paragraph"><p>The challenge for the next generation of FinTech innovators in India is to re-invent the banking system so that it is feasible to include the bottom of the pyramid financially excluded citizens of our Republic.</p></div>
+<div class="paragraph"><p>Both the authors, the Late Prof.  C. K. Prahalad in his The Fortune at the Bottom of the Pyramid book, and Prof Abhijit V. Banerjee, in Poor Economics: A Radical Rethinking of the Way to Fight Global Poverty, have well documented how the poor consume in small amounts.</p></div>
+<div class="paragraph"><p>One can buy a mobile top up for Rs.8, shampoo sachet for Rs.3, a health drink sachet for Rs.5 and many more such products target the bottom of the pyramid.</p></div>
+<div class="paragraph"><p>Yet, to transfer Rs.10 between two bank accounts costs between Rs.2.5 to Rs.5 depending upon one&#8217;s financial status. The thumb rule banks follow is the more average balance you maintain less you pay for the transactions. This is counterproductive for the poor, where the 25% newly opened financial inclusive accounts have zero average balance.</p></div>
+<div class="paragraph"><p>While one can send peer to peer money between the same wallet at zero cost, using a Smart phone application, but then this happens in silos and certainly not interoperable.</p></div>
+<div class="paragraph"><p>Thus a few options exist for those who don&#8217;t have need to transfer small amounts; whereas the needy citizens are excluded from even this limited option.</p></div>
+<div class="paragraph"><p>Therefore, the challenge for the startups is to empower the newly included bottom of the pyramid consumers to make small payments electronically.</p></div>
+<div class="paragraph"><p>Can I buy the Rs.3 health drink sachet across the counter cashless without incurring a penalty? The answer is Yes! Mother Dairy has introduced a NFC (Near Field Communication) token where one can pay for small amounts, cashless. However, this solution while innovative is not portable to other brand stores.</p></div>
+<div class="paragraph"><p>New emerging technologies like NFC and Blockchain can provide a basis for disruptive startups to innovate in the FinTech space,relevant to India.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In India we have a great divide between the haves and have nots. Here are some statistics, followed by some anecdotal episodes to support my point.</p></div>
+<div class="paragraph"><div class="title">Statistics</div><p>While as per the RBI there were 36% adults included in banking system in 2009, and now various reports claim this figure to be around 60% inclusions in 2016. However, as per IMF report, in 2014 there were 1234 accounts per 1000 people in India. Also consider the fact that 219 million accounts were opened between 2014 and 2016 under the Pradhan Mantri Jan Dhan Yojana (PMJDY) for the un-banked population.</p></div>
+<div class="paragraph"><p>Since the IMF data tallies with the World Bank data; the only explanation of the discrepancy between the 1234 accounts per 1000 people and the 40% population being excluded from the banking system, is that the urban Sec-A (or Top of the pyramid ) are over banked.</p></div>
+<div class="paragraph"><div class="title">Anecdotal Evidence</div><p>I counted my family accounts which were 10 bank accounts for a family of 3 persons, excluding fixed deposit accounts. My neighbors and friends also reported a similar figure. Thus I conclude that my hypothesis of over banked Sec-A population to be holding ground.</p></div>
+<div class="paragraph"><p>While in our gated society we have ensured that all staffs of the society as well as household staffs are financially included by having a bank account in a scheduled bank; most of the household staffs and in-house casual service providers still prefer cash salaries.</p></div>
+<div class="paragraph"><p>Thus one of my co-investor of a startup, has devised a simple method, he creates a bonus scheme and pays the bonus to his household staff by on-line bank transfer, some of which he pays to their NPS (National Pension Scheme) accounts.</p></div>
+<div class="sect2">
+<h3 id="_why_the_state_of_the_art_core_banking_architecture_is_inadequate">Why the State of the Art Core Banking Architecture is inadequate</h3>
+<div class="paragraph"><p>As the banks are beings forced to get inclusive, and penetrating the bottom of the economic pyramid, they get challenged by their existing business model of subsidizing their high transactional cost with interest arbitrage earned from the float in their saving account products.</p></div>
+<div class="paragraph"><p>Even while the number of accounts increasing exponentially, the average balance is reducing rapidly. For example in the year 2009, when 36% households were financially included the average balance in savings bank deposits was Rs.7,767, in contrast, in the year 2016, 60% of the household are financially included but the average balance has dropped to Rs.2,333.</p></div>
+<div class="paragraph"><p>25% of the newly opened 219 million accounts between 2014 and 2016, under the Pradhan Mantri Jan Dhan Yojana (PMJDY) have zero average balance.</p></div>
+<div class="paragraph"><p>Thus the Old school Ivy League Banks, with their high cost core banking model must transform or they will be a roadkill of the new age FinTech startups, moving rapidly with innovative technology fueled low cost business models.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_blockchain_technology">Blockchain Technology</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Blockchain concept refers to an open book, distributed ledger, where participants don&#8217;t need anyone&#8217;s permission to access the open ledger nor any permission is needed for transactions.</p></div>
+<div class="paragraph"><p>The participants don&#8217;t need to trust each other, the trust is based on mathematically secured algorithms. The transactions distributed across the networks are collated in batches and blocked together, then a consensus is reached among the participants, for transactions sequencing of these transactions with the block; Based upon algorithms for arriving at a consensus; verifiable by a "proof-of-work" or "proof-of-stake".</p></div>
+<div class="paragraph"><p>Each account of the participants are identified by a cryptographic hash of a Public Key, it&#8217;s corresponding Private Key is only needed to affect the transactions, and prove it&#8217;s authenticity and identity. Thus each participants can choose to be anonymous. These cryptographically secured blocks were chained to together, to make them immutable; Thereby it has the name: "block chain".</p></div>
+<div class="paragraph"><p>Bitcoin,the most popular cryptocurrency, was the first implementation of the Blockchain Technology. This was the version 1, in version 1.5 of Blockchain, startups like colored coins emerged, which enabled multiple currencies or tokens to ride upon Bitcoin. More, cryptocurrencies emerged and were traded over the Internet.</p></div>
+<div class="paragraph"><p>In Blockchain version 1.5, a combination trust based centralized wallets and currency exchanges emerged. This violation of basic idea of being a trust less, decentralized network, has resulted in mass scale frauds via breach of trust and  large scale identity theft from &amp; by these "trust" based centralized systems.</p></div>
+<div class="paragraph"><p>Cryptocurrencies have a high volatility as well as being anonymous in nature, illicit trading in drugs, terror funding and money laundering started to occur. Also, some of the large scale stealing and frauds occurred, where the centralized systems, like currency exchanges, were hacked and private keys stolen.</p></div>
+<div class="paragraph"><p>The lawmakers, with some help from the academia have been able understand the technology and have been able to track down and prosecute the block chain savvy criminals.</p></div>
+<div class="paragraph"><p>Also, the netizen have understood that they tend to loose anonymity as soon as they change the cryptocurrencies to fiat Currencies.</p></div>
+<div class="paragraph"><p>Around 2015, smart contract enabled Blockchain Technology 2.0 emerged with Ethereum, Interledger, Hyperledger, Nxt and Lighting Networks. These networks allow secured and distributed contracts applications.</p></div>
+<div class="paragraph"><p>It too has it&#8217;s share of frauds, Ethereum DAO (Distributed Autonomous Organization) Smart Contract, was probably the first widely reported fraud. It divided the community over the hard forking of the network. Since the Smart Contract performed exactly as specified, and Ethereum did not have any bugs, one section of the community broke away resulting in duplicated tokens.</p></div>
+<div class="paragraph"><p>However, the Ethereum itself survives the fork and so does Bitcoin in spite of multiple frauds in it&#8217;s numerous currency exchanges.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_regulatory_framework_in_india">Regulatory Framework in India</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>India has a robust centralized payment system. NPCI (National Payment Corporation of India) a non-profit company formed by Indian Bankers' Association, facilitated by Reserve Bank of India (RBI) and IDRBT (Institute for Development and Research in Banking Technology) is running the Indian ATM Network, the Financial Transaction Switch, National Automated Clearing House, IMPS (Immediate Payment System, the Mobile payment system), AEPS (AADHAAR Enabled Payment System) Rupay (India&#8217;s answer to Visa &amp; Master Card) and NEFT (National Electronic Fund Transfer).</p></div>
+<div class="paragraph"><p>Recently in April 2016, 10 banks launched their Mobile Application based on NPCI UPI (Unified Payment Interface) API. UPI, allows for Tokenization, and the UPI documents also mentions Blockchain networks in passing.</p></div>
+<div class="paragraph"><p>India has a strong and stable banking regulation, thanks to it&#8217;s regulator, Reserve Bank of India (RBI). To drive the financial inclusion, RBI has been opening up the banking space with various types of licenses.</p></div>
+<div class="paragraph"><p>Apart from the scheduled banks, the Urban and Rural Co-operative banks, it has allowed Prepaid Payment Instruments (Mobile Wallets), Payments banks and now Small Finance Banks and On Tap Banking licenses. Also, it has allowed formation of private entities to act as Banking Business Correspondent, who can extend the banking outreach beyond bank&#8217;s branches.</p></div>
+<div class="paragraph"><div class="title">Why So Many Licenses?</div><p>Money is an artificial device invented for measuring, storing and exchanging of economic value created by the society.</p></div>
+<div class="paragraph"><p>Storage of Value requires Security and Stability; While Exchange of value requires agility and rapid paced innovation. For the scheduled banks balancing act between Stability and Agility has resulted in slow paced innovation. Thus, RBI have enabled multiple types of licenses to address these diverse requirements.</p></div>
+<div class="paragraph"><p>Different licenses provide coverage for different aspects and use-cases of payments and banking needs of the Indian citizen.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adapting_the_blockchain_technology_for_fintech_adoption">Adapting the Blockchain Technology for FinTech Adoption</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Bank of England, EU Central Bank, the US Regulators as well as RBI have formed committees to look into Blockchain and have notified or published Blockchain position papers.</p></div>
+<div class="paragraph"><p>Blockchain 2.0, with Smart Contract beholds the promise to revolutionize and disrupt the high costs of banking and slow pace of innovation in FinTech.</p></div>
+<div class="paragraph"><p>Some of the forward looking banks have been experimenting with Blockchain technology mainly around cross border money transfers, and financial Supply Chain.</p></div>
+<div class="paragraph"><div class="title">Indian Context</div><p>With RBI allowing Payments Banks, Prepaid Instrument, on-tap banking licenses, along with publishing the UPI specification; we can now innovate with NFC (Near Field Communication) Tokens, and Blockchain enabled smart contracts.</p></div>
+<div class="paragraph"><p>Blockchain 2.0 Network allows for Public, Private and Consortium (permission) Based Network. These three type of Blockchain Networks correspond to Internet, LAN and VPN in TCP/IP parlance.</p></div>
+<div class="paragraph"><p>Using Blockchain Network, with UPI API and NFC we can enable multiple use cases like low value high velocity money transfer between citizens.</p></div>
+<div class="paragraph"><p>I envisage a consortium based Blockchain network, facilitated by NPCI that will replace the today&#8217;s high cost core banking infrastructure with low cost, secured and transparent distributed ledger.</p></div>
+<div class="paragraph"><p>This will also enable innovative features, like Account Portability.</p></div>
+<div class="paragraph"><p>Like we have the MNP (Mobile Number Interoperability) between Telecommunication Networks, Bank Account Portability with automatic balance and ledger transfer will be possible with Blockchain. Thus we will not loose the transaction histories when we change our banking service providers. This will foster health competition among banks and reduce transaction costs.</p></div>
+<div class="paragraph"><p>Regulator can conduct real-time audit and AML (Anti Money Laundering) and Combating of Financing of Terrorism (CFT) monitoring. Reducing regulatory burden on the banks on one hand and improving the regulator&#8217;s visibility into the money supply and fund flow on the other hand.</p></div>
+<div class="paragraph"><p>Today, 15 August 2016, being India&#8217;s 70th Independence Day, I envision our Freedom from the high transaction charges in next few years.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources">Resources</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><a href="http://www.slideshare.net/Tech_Evangelist/next-gen-banking-opportunities-in-inda">Next Generation Banking Opportunities in India</a></p></div>
+<div class="paragraph"><p><a href="http://setu-digital.blogspot.in/2015/03/banking-regulatory-landscape-in-india.html">Banking Regulatory Landscape in India</a></p></div>
+<div class="paragraph"><p><a href="http://setu-digital.blogspot.in/2014/02/social-banking-framework.html">Social Banking Framework</a></p></div>
+<div class="paragraph"><div class="title">Stats</div><p><a href="https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=2344">RBI: Deregulation of Savings Bank Deposit Interest Rate : A Discussion Paper</a></p></div>
+<div class="paragraph"><p>End-March 09 Accounts per 100 persons = 36.2, Per Capita Savings Bank Deposits = 7767, Per Capita Aggregate Deposits = 35210</p></div>
+<div class="paragraph"><p><a href="https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=2344">Deregulation of Savings Bank Deposit Interest Rate : A Discussion Paper</a></p></div>
+<div class="paragraph"><p><a href="http://www.ibef.org/industry/banking-india.aspx">Under Pradhan Mantri Jan Dhan Yojna (PMJDY), 217 million accounts! have been opened </a></p></div>
+<div class="paragraph"><p>The average deposit per account under the Pradhan Mantri Jan Dhan Yojana (PMJDY) Rs 1,735 in May 2016,total account were 219 million in May 2016 of which 25.7% were zero balance accounts. Avarage balance Rs 2,333 of all accounts.</p></div>
+<div class="paragraph"><p><a href="http://economictimes.indiatimes.com/news/economy/finance/jan-dhan-deposits-up-118-per-cent-over-21-months/articleshow/52937233.cms">Jan Dhan Yojna News Report</a></p></div>
+<div class="paragraph"><p><a href="https://knoema.com/IMFFAS2016/imf-financial-access-survey-fas-2014?country=1000760-india">IMF data in 2014 shows 1234 Household deposit accounts with commercial banks per 1000 adults</a></p></div>
+<div class="paragraph"><p><a href="http://www.ibef.org/industry/banking-india.aspx">Banking Sector in India</a></p></div>
+<div class="paragraph"><p><a href="https://enps.nsdl.com/eNPS/LandingPage.html">National Pension Scheme</a></p></div>
+<div class="paragraph"><p><a href="https://en.wikipedia.org/wiki/The_Fortune_at_the_Bottom_of_the_Pyramid">The Fortune at the Bottom of the Pyramid</a></p></div>
+<div class="paragraph"><p><a href="https://en.wikipedia.org/wiki/Poor_Economics">Poor Economics: A Radical Rethinking of the Way to Fight Global Poverty </a></p></div>
+<div class="paragraph"><p><a href="https://www.quora.com/Why-is-a-shampoo-sachet-cheaper-than-a-bottle">Why is a shampoo sachet cheaper than a bottle?</a></p></div>
+<div class="paragraph"><p><a href="https://thoughtmachine.net/?page_id=83">Blockchain core banking startup</a></p></div>
+<div class="paragraph"><p><a href="https://youtu.be/une1TLAk3is">NAVROZE DASTUR, Bloomberg TV interview, June 16, 06, claims that it costs Rs.20 for ATM transaction</a></p></div>
+<div class="paragraph"><p><a href="http://economictimes.indiatimes.com/markets/stocks/news/banking-stocks-gain-as-rbi-launches-countrys-first-upi/articleshow/51790019.cms">April 2016, 10 Banks launch UPI enabled App</a></p></div>
+<div class="paragraph"><div class="title">KYC</div><p><a href="https://rbi.org.in/scripts/BS_ViewMasCirculardetails.aspx?id=8179">RBI Circular on Know Your Customer (KYC) norms / Anti-Money Laundering (AML) standards/Combating of Financing of Terrorism (CFT)</a></p></div>
+<div class="paragraph"><p><a href="https://uidai.gov.in/fi-e-kyc.html">UIDAI e-KYC</a></p></div>
+<div class="paragraph"><p><a href="https://www.tin-nsdl.com/download/pan/form49aa.pdf">TIN (Tax Identity Number) PDF format Individuals not being a Citizen of India/Entities incorporated outside India/ Unincorporated entities formed outside India</a></p></div>
+<div class="paragraph"><p><a href="http://dipp.nic.in/English/policies/FDI_Circular_2015.pdf">Annex-6 KYC requirements for FDI(Foreign Direct Investment) for Non Indian Entities</a></p></div>
+<div class="paragraph"><p><a href="http://mutualfund.birlasunlife.com/Documents/Individual-KYC-Form-Version-2.pdf">KYC Sample form for Non Indian Individuals</a></p></div>
+<div class="paragraph"><div class="title">Regulatory Papers</div><p><a href="https://www.ecb.europa.eu/pub/pdf/scpops/ecbop172.en.pdf">EU Central Bank: Distributed ledger technologies in securities post-trading (pdf)</a></p></div>
+<div class="paragraph"><p><a href="https://rbi.org.in/Scripts/PublicationReportDetails.aspx?UrlPage=&amp;ID=832">RBI Implications of ‘disruptions’ – ‘Blockchain’ technology</a></p></div>
+<div class="paragraph"><p><a href="https://www.fincen.gov/statutes_regs/guidance/pdf/FIN-2013-G001.pdf">US Government: Application of FinCEN’s Regulations to Persons Administering, Exchanging, or Using Virtual Currencies</a></p></div>
+<div class="paragraph"><p><a href="http://www.dfs.ny.gov/legal/regulations/adoptions/dfsp200t.pdf">US: REGULATIONS OF THE SUPERINTENDENT OF FINANCIAL SERVICES VIRTUAL CURRENCIES (pdf)</a></p></div>
+<div class="paragraph"><p><a href="https://rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=30247">Indian Government: RBI cautions users of Virtual Currencies against Risks</a></p></div>
+<div class="paragraph"><p><a href="http://www.bankofengland.co.uk/research/Documents/workingpapers/2016/swp605.pdf">The macroeconomics of central bank issued digital currencies (pdf) </a></p></div>
+<div class="paragraph"><div class="title">Blockchain v1.0 papers</div><p><a href="https://bitcoin.org/bitcoin.pdf">Satoshi Nakamoto: Bitcoin: A Peer-to-Peer Electronic Cash System (pdf)</a></p></div>
+<div class="paragraph"><p><a href="http://www.economist.com/news/briefing/21677228-technology-behind-bitcoin-lets-people-who-do-not-know-or-trust-each-other-build-dependable">Economist magazine: The great chain of being sure about things(pdf)</a></p></div>
+<div class="paragraph"><p><a href="https://cryptome.org/2013/11/bitcoin-pirate-nakamoto.pdf">How Did Dread Pirate Roberts Acquire and Protect His Bitcoin Wealth? (pdf )</a></p></div>
+<div class="paragraph"><p><a href="http://arxiv.org/pdf/1107.4524.pdf">An Analysis of Anonymity in the Bitcoin System (pdf ) </a></p></div>
+<div class="paragraph"><p><a href="https://eprint.iacr.org/2012/584.pdf">Quantitative Analysis of the Full Bitcoin Transaction Graph (pdf)</a></p></div>
+<div class="paragraph"><p><a href="https://cseweb.ucsd.edu/~smeiklejohn/files/imc13.pdf">A Fistful of Bitcoins: Characterizing Payments Among Men with No Names (pdf )</a></p></div>
+<div class="paragraph"><p><a href="http://snap.stanford.edu/class/cs224w-2013/projects2013/cs224w-039-final.pdf">The Hacker’s Code: Finding Bitcoin Thieves Through the Similarity and Status Claims Between Users</a></p></div>
+<div class="paragraph"><div class="title">Blockchan 2.x</div><p><a href="https://lightning.network/lightning-network-paper.pdf">The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments (pdf)</a></p></div>
+<div class="paragraph"><p><a href="https://github.com/ethereum/wiki/wiki/White-Paper">A Next-Generation Smart Contract and Decentralized Application Platform</a></p></div>
+<div class="paragraph"><p><a href="https://blog.ethereum.org/2016/07/20/hard-fork-completed/">Ethereum Hard Fork</a></p></div>
+<div class="paragraph"><p><a href="http://www.coindesk.com/twelve-banks-blockchain-consortium-r3/">12 More Banks Join Blockchain Consortium R3</a></p></div>
+<div class="paragraph"><p><a href="https://www.blockchain.com/thunder/">Blockchain Thunder</a></p></div>
+<div class="paragraph"><p><a href="https://www.hyperledger.org/">Hyperledger</a></p></div>
+<div class="paragraph"><p><a href="http://ethereum.org/">Ethereum</a></p></div>
+<div class="paragraph"><p><a href="https://dappsforbeginners.wordpress.com/tutorials/your-first-dapp/">DAPP For Beginners</a></p></div>
+<div class="paragraph"><p><a href="http://solidity.readthedocs.io/en/latest/solidity-in-depth.html">Solidity in Depth</a></p></div>
+<div class="paragraph"><p><a href="https://www.bitmex.com/app/index/.ETHXBT">ETH Volatility Index</a></p></div>
+<div class="paragraph"><p>.</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version 0.01<br />
+Last updated
+ 2016-08-15 14:07:52 IST
+</div>
+</div>
+</body>
+</html>
