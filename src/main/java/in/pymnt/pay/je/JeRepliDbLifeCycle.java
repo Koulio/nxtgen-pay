@@ -23,6 +23,8 @@
 package in.pymnt.pay.je;
 
 import com.sleepycat.je.EnvironmentConfig;
+// http://www.oracle.com/technetwork/database/berkeleydb/downloads/maven-087630.html
+// JE 6.3.8 has Replication support which is not present in Maven repo
 import com.sleepycat.je.rep.ReplicatedEnvironment;
 import com.sleepycat.je.rep.ReplicationConfig;
 import java.io.File;
@@ -41,13 +43,14 @@ public class JeRepliDbLifeCycle extends JeDbLifeCycle {
             envConfig.setAllowCreate(true);
             envConfig.setTransactional(true);
             
-            ReplicationConfig repliConfig = new ReplicationConfig();
+          ReplicationConfig repliConfig = new ReplicationConfig();
             repliConfig.setGroupName(envInfo.getGroupName());
             repliConfig.setNodeName(envInfo.getNodeName());
             repliConfig.setNodeHostPort(envInfo.getNodeHostPort());
 
             env = new ReplicatedEnvironment(new File(envInfo.getEnvHome()), // Env home
                     repliConfig, envConfig);
+
 
         }
     }

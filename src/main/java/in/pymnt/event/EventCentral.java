@@ -17,8 +17,9 @@
 * 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 * 
-* Author: Ashish Banerjee, ashish@bonbiz.in
+* Author: Ashish Banerjee, tech@innomon.in
 */
+
 
 package in.pymnt.event;
 
@@ -31,18 +32,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO: Receive concurrency and syncro design
+ * TODO: Review concurrency and syncro design
  * @author ashish
  */
 public class EventCentral implements Runnable {
     private static ArrayList<EventListner> listners = new ArrayList<EventListner>();
     // TODO: Review the design
     public static int maxEventThreads = 4;
-    public static int maxShutDownWaitSec = 5;
+    public static int maxShutDownWaitSec = 1;
     
     public static ExecutorService execServ = null;
  
-    public  static  Logger logger = Logger.getLogger("JIO");
+    public  static  Logger logger = Logger.getLogger("UPAY");
 
 
      
@@ -64,7 +65,7 @@ public class EventCentral implements Runnable {
         if( evt instanceof ExitEvent) 
             shutdown();
     }
-    private synchronized static void shutdown() {
+    public synchronized static void shutdown() {
          if(execServ != null) {
              try {
                  execServ.shutdown();

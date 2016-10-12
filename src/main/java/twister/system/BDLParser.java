@@ -5,12 +5,38 @@
 *  tested with jdk 1.3, will it work with jdk 1.2 ?
  * AB: 8-apr-11 : fixed Logger
  * AB: 03-APR-15 : Properties patch line 258
+ * AB: 10-OCT-16 : Added Thread Executors (~line 198) also added exit callback hook.
+ * AB: 10-OCT-16 : TODO: expose BDL exec() as an OSGi service.
 */
+/*
+* 
+*
+* The Universal Permissive License (UPL), Version 1.0
+* 
+* Subject to the condition set forth below, permission is hereby granted to any person obtaining a copy of this software, associated documentation and/or data (collectively the "Software"), free of charge and under any and all copyright rights in the Software, and any and all patent rights owned or freely licensable by each licensor hereunder covering either (i) the unmodified Software as contributed to or provided by such licensor, or (ii) the Larger Works (as defined below), to deal in both
+
+* (a) the Software, and
+
+* (b) any piece of software and/or hardware listed in the lrgrwrks.txt file if one is included with the Software (each a “Larger Work” to which the Software is contributed by such licensors),
+* 
+* without restriction, including without limitation the rights to copy, create derivative works of, display, perform, and distribute the Software and make, use, sell, offer for sale, import, export, have made, and have sold the Software and the Larger Work(s), and to sublicense the foregoing rights on either these or other terms.
+* 
+* This license is subject to the following condition:
+* 
+* The above copyright notice and either this complete permission notice or at a minimum a reference to the UPL must be included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+* 
+* 
+*/
+
 package twister.system;
 
 import java.util.Hashtable;
 import java.io.*;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +51,11 @@ WITH pop
 END WITH
 RUN pop
 **/
+
 public class BDLParser   {
+    CallBack callback = null;
+    ExecutorService execSrv = null;
+    
     public BDLParser() {
       this(new Hashtable());
     }
@@ -37,6 +67,17 @@ public class BDLParser   {
     public void setLogger(Logger ps) {
        log = ps;
     }
+
+    public void setCallback(CallBack callback) {
+        this.callback = callback;
+    }
+
+    public void setExecSrv(ExecutorService execSrv) {
+        this.execSrv = execSrv;
+    }
+    /*
+     Executes BDL file, may contain multiple lines
+    */
     public synchronized void exec(InputStream in) throws IOException, IllegalArgumentException {
            rdr = new BufferedReader(new InputStreamReader(in));
            int errCnt = 0;
@@ -50,7 +91,7 @@ public class BDLParser   {
                       if(cmdLn.startsWith(";"))
                           continue; // while
 			if(cmdLn.length() > 0)
-                          exec(cmdLn);
+                          execLine(cmdLn);
                      errCnt = 0; // reset err
                   }
                   catch(Exception ex) {
@@ -65,7 +106,10 @@ public class BDLParser   {
            } // while
 
     }
-    protected void exec(String ln) throws Exception {
+    /*
+    * executes a single BDL line.
+    */
+    public void execLine(String ln) throws Exception {
         tox = new StreamTokenizer(new StringReader(ln));
         tox.resetSyntax();   // reset is needed as StreamTokenizer constructor calls parseNumbers()
         tox.wordChars('a', 'z');
@@ -138,7 +182,7 @@ public class BDLParser   {
            System.out.println("usage BDLParser <BDL file name>");
            System.exit(1);
         }
-        System.out.println("pay Engine. Ver 1.0.1 25-July-2015 ");
+        System.out.println("UPAY 09-June-2018: www.BonBiz.in ");
 /**
         System.out.println("Twister SmsPush/Pull Technology Version 1.2 Release 20010127");
         if(System.currentTimeMillis() > 997879027150L) {
@@ -159,6 +203,9 @@ public class BDLParser   {
     //----
     class CmdRun implements Command {
        public void exec(StreamTokenizer tok, Hashtable ctx) throws Exception {
+           if(execSrv == null)
+             execSrv = Executors.newCachedThreadPool();
+           
            if(tok.nextToken() != tok.TT_WORD) {
               log("ERROR: PROC=BDLParser.CmdRun; ID=104;  MSG=Format expected RUN <Runnable Obj ref>");
            }
@@ -167,13 +214,14 @@ public class BDLParser   {
                Object rx = ctx.get(x);
                if(rx == null)
                   log("ERROR: PROC=BDLParser.CmdRun; LINE="+lineCnt+"; ID=105;  MSG= Ref. ["+x+"] not found in sysTab");
-               else if(rx instanceof Thread) {
+               /*else if(rx instanceof Thread) {
                   verbose("INFO: PROC=BDLParser.CmdRun; LINE="+lineCnt+"; ID=106;  MSG=Executing thread ["+x+"];",2);
                   ((Thread)rx).start();
-               }
+               }*/
                else if(rx instanceof Runnable ) {
                   verbose("INFO: PROC=BDLParser.CmdRun; LINE="+lineCnt+"; ID=107;  MSG=Executing Runnable ["+x+"];",2);
-                  (new Thread((Runnable)rx)).start();
+                  //(new Thread((Runnable)rx)).start();
+                  execSrv.execute((Runnable)rx);
                }
                else {
                   log("ERROR: PROC=BDLParser.CmdRun; LINE="+lineCnt+"; ID=105;  MSG= Ref. ["+x+"] is not Thread or Runnable");
@@ -191,7 +239,8 @@ public class BDLParser   {
     class CmdExit implements Command {
        public void exec(StreamTokenizer tok, Hashtable ctx) throws Exception {
             log("PROC=BDLParser.CmdExit; LINE="+lineCnt+"; ID=999;  MSG=INFO: executing Exit command");
-            System.exit(1);
+            if (callback == null) System.exit(1); else callback.onExit();
+            
        }
     }
     class CmdObject implements Command {
@@ -253,7 +302,7 @@ public class BDLParser   {
             else
              log("ERROR: PROC=BDLParser.CmdSet; LINE="+lineCnt+"; ID=108;  MSG=Invalid syntax for SET <property > = <rval>;");
           }
-       } // cmd exec
+       } // cmd execLine
 
        private void processRval() throws Exception {
           // This method is called only if parsing is successfull

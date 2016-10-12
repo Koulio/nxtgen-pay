@@ -17,5 +17,53 @@
 * 
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 * 
-* Author: Ashish Banerjee, tech@bonbiz.in
+* Author: Ashish Banerjee, ashish@bonbiz.in
 */
+
+package in.pymnt;
+
+import in.pymnt.event.EventCentral;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import twister.system.BDLParser;
+
+public class Activator implements BundleActivator {
+    public static final String BDL_PROPERTY_NAME = "digital.megh.f2p.scraper.BDL";
+    public static final String DEFAULT_BDL_RESOURCE_FILE =  "/bdl/scrapper.bdl";
+     
+    ExecutorService execSrv = null;
+    BundleContext ctx = null;
+    @Override
+    public void start(BundleContext context) throws Exception {
+        ctx = context;
+        String bdlFileName = ctx.getProperty(BDL_PROPERTY_NAME);
+        bdlFileName = ((bdlFileName == null)? bdlFileName: DEFAULT_BDL_RESOURCE_FILE);
+        java.net.URL bdlUrl = ctx.getBundle().getResource( bdlFileName);
+        
+        if(bdlUrl == null)
+            throw new Exception("["+bdlFileName+"] not found. Must be defined by ["+BDL_PROPERTY_NAME+"]");
+        
+        if(execSrv == null) {
+             execSrv = Executors.newCachedThreadPool();
+             EventCentral.execServ = execSrv;
+        }     
+        
+        BDLParser bdl = new BDLParser();
+        bdl.setExecSrv(execSrv);
+        bdl.exec(bdlUrl.openStream());
+        
+    }
+
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        EventCentral.shutdown();
+        if(execSrv == null) {
+            execSrv.shutdownNow();
+        }
+    }
+
+
+
+}
