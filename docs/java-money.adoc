@@ -1,0 +1,11 @@
+== Java Money
+
+http://javamoney.github.io/[Java Money]
+
+https://github.com/JavaMoney/[Java Money Github]
+
+https://github.com/interledger/java-ilp-ledger-simple[Interledger simple ledger uses Java Money]
+
+https://jcp.org/aboutJava/communityprocess/final/jsr354/index.html[JSR 354]
+
+
