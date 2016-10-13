@@ -19,62 +19,32 @@
 * 
 * Author: Ashish Banerjee, ashish@bonbiz.in
 */
-package in.innomon.pay.impl;
 
-import in.qzip.pay.cmd.Context;
+package in.qzip.pay.impl;
+
 import in.qzip.pay.txn.TxnException;
-import java.util.StringTokenizer;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author ashish
  */
-public class CmdGetOtp extends CmdAdminBase {
-
-    private Pattern patNums = Pattern.compile("[0-9]{1,4}(\\.[0-9]{1,2})?");
-
-    public CmdGetOtp() {
-        cmdName = "OTP";
-        help = "OTP <Max Amount>";
-    }
-
-    @Override
-    public String exec(String cmdLine, Context cmdCtx) {
-        String ret = "Not Found";
-        AdminCmdHelper helper = getAdminHelper();
-        String msgSender = getSenderId(cmdCtx);
-        if (msgSender == null) {
-            return "ERROR: Internal Error Message Sender Not set in context XmppConstants.CTX_XMPP_MSG_SENDER";
-        }
-
-        if (helper == null) {
-            return "ERROR: Internal Error, missing AdminCmdHelper implemenation";
-        }
-        int ndx = cmdLine.toUpperCase().indexOf(cmdName);
-        if(ndx < 0) {
-            return "INVALID Command ["+cmdLine+"]\n"+ getCmdHelp();
-        }
-        String sub = cmdLine.substring(ndx);
-        StringTokenizer tok = new StringTokenizer(sub);
-        ndx = tok.countTokens();
-        if(ndx != 2) {
-             return "INVALID Arguments\n"+ getCmdHelp();
-        }
-        tok.nextToken(); // skip the command
-        String amtVal = tok.nextToken();  
-        if(!patNums.matcher(amtVal).matches())
-            return "INVALID Max Amount, should be whole number ["+amtVal+"]";
-        try {
-            String mobile = helper.getAccountName(msgSender);
-            String mmid = helper.getPrimaryMMID(mobile);
-            long otp = helper.genOtp(mobile, Double.parseDouble(amtVal));
-            ret = ""+otp+"\n forward the message to benefitiary\n"+
-                    "CASH <Amout> <mobile> <MMID> <OTP>\n CASH "+amtVal+" "+mobile+" "+mmid+" "+otp+"\n";
-        } catch (TxnException ex) {
-            cmdCtx.getLogger().severe(ex.toString());
-            ret = ex.getError().name();
-        }
-        return ret;
-    }
+public interface AdminCmdHelper {
+    public boolean isAdmin(String emailId);
+    // Admin REG creates a new mobile and KYC pin
+    public void register(String mobile, int kycPin) throws TxnException;
+    // User receives KYC PIN by SMS and regesters using REGISTER command
+    public void userRegistration(String email, String nickName, String mobile, int kycPin) throws TxnException;
+    
+    public String getAccountName(String email) throws TxnException;
+    public String getAccountEmail(String accountName) throws TxnException;
+    
+    public double getAccountBalance(String accountName) throws TxnException; 
+    public long   genOtp(String email, double maxAmount) throws TxnException; 
+    // Admin can load Money
+    public String loadMoney(String accountName, double amount) throws TxnException; 
+    public String unloadMoney(String accountName, double amount) throws TxnException; 
+    public String pullMoney(String fromAccountName, String toAccountName, double amount, long otp) throws TxnException;
+    
+    public String getPrimaryMMID(String mobile);
+    
 }

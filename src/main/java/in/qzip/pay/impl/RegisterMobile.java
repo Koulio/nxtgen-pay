@@ -19,97 +19,104 @@
 * 
 * Author: Ashish Banerjee, ashish@bonbiz.in
 */
-package in.innomon.pay.impl;
+package in.qzip.pay.impl;
 
-import in.qzip.pay.txn.Transactor;
+import in.qzip.pay.txn.AccountInfo;
+import in.qzip.pay.txn.AccountInfoManager;
 import in.qzip.pay.txn.Balance;
 import in.qzip.pay.txn.TxnException;
 import in.qzip.pay.txn.TxnFactory;
 import in.qzip.pay.txn.TxnManager;
-import in.qzip.pay.txn.TxnPayload;
-import in.qzip.pay.txn.TxnReq;
-import in.qzip.pay.txn.TxnRes;
 
 /**
- * 
+ *
  * @author ashish
  */
-public class MoneyLoader {
-    private TxnFactory tfact;
-    
-    public MoneyLoader(TxnFactory fact) {
-        this.tfact = fact;
+public class RegisterMobile {
+
+    private TxnFactory tfact = null;
+
+    public RegisterMobile() {
     }
-    
-    public TxnRes loadMoney(String accountName, double amount) throws TxnException {
-        TxnPayload txpl = new TxnPayload();
-        TxnManager txnMgr = tfact.createTxnManager();
-        try {
-            String floater = txnMgr.getFloaterAccountName();
-            TxnReq req = txpl.getReq();
-            req.setTxnAmount(amount);
-            req.setDeductFromAccount(floater);
-            req.setAddToAccount(accountName);
-            req.setTxnRefID(java.util.UUID.randomUUID().toString());
-            Transactor txor = new Transactor();
-            txor.transact(txnMgr, txpl);
-        } finally {
-            txnMgr.close();
-        }
-        return txpl.getRes();
+
+    public RegisterMobile(TxnFactory tfact) {
+        this.tfact = tfact;
     }
-      public TxnRes unloadMoney(String accountName, double amount) throws TxnException {
-        TxnPayload txpl = new TxnPayload();
-        TxnManager txnMgr = tfact.createTxnManager();
-        try {
-            String floater = txnMgr.getFloaterAccountName();
-            TxnReq req = txpl.getReq();
-            req.setTxnAmount(amount);
-            req.setDeductFromAccount(accountName);
-            req.setAddToAccount(floater);
-            req.setTxnRefID(java.util.UUID.randomUUID().toString());
-            Transactor txor = new Transactor();
-            txor.transact(txnMgr, txpl);
-            
-        } finally {
-            txnMgr.close();
-        }
-        return txpl.getRes();
-    }
-      public TxnRes transferMoney(String fromAccountName, String toAccountName, double amount, long otp) throws TxnException {
-        TxnPayload txpl = new TxnPayload();
-        TxnManager txnMgr = tfact.createTxnManager();
-        try {
-            TxnReq req = txpl.getReq();
-            req.setTxnAmount(amount);
-            req.setDeductFromAccount(fromAccountName);
-            req.setAddToAccount(toAccountName);
-            req.setOtp(otp);
-            req.setTxnRefID(java.util.UUID.randomUUID().toString());
-            Transactor txor = new Transactor();
-            txor.transact(txnMgr, txpl);
-            
-        } finally {
-            txnMgr.close();
-        }
-        return txpl.getRes();
-    }
-    public long genOtp(String mobile, double amount) throws TxnException {
-        long otp = 0;
+
+    public void register(String mobile, int kycPin) throws TxnException {
+// Should not be present in AccountInfo nor in Balance collections
+        ensureMobileNotRegistred(mobile);
         TxnManager txnMgr = tfact.createTxnManager();
         try {
             txnMgr.beginTxn();
             Balance bal = txnMgr.getBalance(mobile);
-            if(bal == null) {
-                txnMgr.rollback();
-                throw new TxnException(TxnException.Error.ERR_ACCOUNT_DOES_NOT_EXISTS);
+            if (bal != null) {
+                throw new TxnException(TxnException.Error.ERR_ACCOUNT_EXISTS);
             }
-            otp = bal.genOtp(amount);
-            txnMgr.updateBalance(bal);
+
+            Balance newAct = txnMgr.createBalance(mobile);
+            newAct.setMpin(kycPin);
+
+            txnMgr.updateBalance(newAct);
             txnMgr.commit();
+
         } finally {
             txnMgr.close();
         }
-        return otp;
-    }  
+    }
+
+    private void ensureMobileNotRegistred(String mobile) throws TxnException {
+        AccountInfoManager actInfoMgr = tfact.createAccountInfoManager();
+        try {
+            AccountInfo actInfo = actInfoMgr.getAccountInfoForAccountName(mobile);
+            if (actInfo != null) {
+                throw new TxnException(TxnException.Error.ERR_ACCOUNT_INFO_EXIST);
+            }
+        } finally {
+            actInfoMgr.close();
+        }
+    }
+    // User receives KYC PIN by SMS or in person and regesters using REGISTER command from XMPP client
+
+    public void userEmailRegistration(String email, String nickName, String mobile, int kycPin) throws TxnException {
+
+        TxnManager txnMgr = tfact.createTxnManager();
+        AccountInfoManager actInfoMgr = tfact.createAccountInfoManager();
+        try {
+
+            // Validations
+            // Mobile number should not be assigned to any user
+            AccountInfo actInfo = actInfoMgr.getAccountInfoForAccountName(mobile);
+            if (actInfo != null) {
+                throw new TxnException(TxnException.Error.ERR_ACCOUNT_INFO_EXIST);
+            }
+
+            // check KYC PIN
+            txnMgr.beginTxn();
+            Balance bal = txnMgr.getBalance(mobile);
+            if (bal == null) {
+                throw new TxnException(TxnException.Error.ERR_ACCOUNT_DOES_NOT_EXISTS);
+            }
+            if (bal.isBlocked()) {
+                throw new TxnException(TxnException.Error.ERR_ACCOUNT_BLOCKED);
+            }
+            if (bal.getMpin() != kycPin) {
+                throw new TxnException(TxnException.Error.ERR_INVALID_PIN);
+            }
+
+            // Create the Account
+            actInfo = new AccountInfo();
+            actInfo.setAccountName(mobile);
+            actInfo.setEmail(email);
+            actInfo.setPersonName(nickName);
+            
+            actInfoMgr.updateAccountInfo(actInfo);
+            
+            txnMgr.commit();
+            
+        } finally {
+            txnMgr.close();
+            actInfoMgr.close();
+        }
+    }
 }

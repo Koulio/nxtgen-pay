@@ -19,41 +19,72 @@
 * 
 * Author: Ashish Banerjee, ashish@bonbiz.in
 */
-
-package in.innomon.pay.impl;
+package in.qzip.pay.impl;
 
 import in.qzip.pay.cmd.Context;
 import in.qzip.pay.txn.TxnException;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author ashish
  */
-public class CmdBalance extends CmdAdminBase {
-    public CmdBalance() {
-        cmdName = "BAL";
-        help = "BAL: displays Balance in your account";        
+public class CmdAdmLoad extends CmdAdminBase {
+    private Pattern patNums = Pattern.compile("[0-9]*");
+    private Pattern patMail = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
+    
+    public CmdAdmLoad() {
+        cmdName = "LOAD";
+        help = "ADMIN Load <email or mobile> <amount>";        
     }
-
     @Override
     public String exec(String cmdLine, Context cmdCtx) {
-        String ret = "Not Found";
-    AdminCmdHelper helper = getAdminHelper();
+         AdminCmdHelper helper = getAdminHelper();
         String msgSender =  getSenderId(cmdCtx);
         if(msgSender == null)
             return "ERROR: Internal Error Message Sender Not set in context XmppConstants.CTX_XMPP_MSG_SENDER";
- 
         if(helper == null)
             return "ERROR: Internal Error, missing AdminCmdHelper implemenation"; 
+        if(!helper.isAdmin(msgSender))
+            return "ERROR: Sorry You ["+msgSender+"] Do not have Admin Rights.";
         
+        int ndx = cmdLine.toUpperCase().indexOf(cmdName);
+        if(ndx < 0) {
+            return "INVALID Command ["+cmdLine+"]"+ getCmdHelp();
+        }
+        String sub = cmdLine.substring(ndx);
+        StringTokenizer tok = new StringTokenizer(sub);
+        ndx = tok.countTokens();
+        if(ndx != 3) {
+             return "INVALID Arguments\n"+ getCmdHelp();
+        }
+        tok.nextToken(); // skip the command
+        String param = tok.nextToken();
+        String amtVal = tok.nextToken();
+        
+        String mobile = null, mail = null;
+        if(param.length() == 10 && patNums.matcher(param).matches() )
+            mobile = param;
+        
+        if(patMail.matcher(param).matches())
+           mail = param;
+        String ret = "OK";
+        
+        if(mail == null && mobile == null)
+            return "ERROR format of ["+param+"] should either be a 10 digit mobile or an email id";
+        if(!patNums.matcher(amtVal).matches())
+            return "ERROR second param ["+amtVal+"] must be a number";
         try {
-            String actName = helper.getAccountName(msgSender);
-            double baln = helper.getAccountBalance(actName);
-            ret = "Balance = "+baln+"\nAccount Name= ["+actName+"]\n";
-        } catch (TxnException ex) {
+            if(mobile == null)
+                mobile = helper.getAccountName(mail);
+            ret = helper.loadMoney(mobile, Double.parseDouble(amtVal));
+        }catch (TxnException ex) {
             cmdCtx.getLogger().severe(ex.toString());
             ret = ex.getError().name(); 
         }
         return ret;
+
     }
+
 }

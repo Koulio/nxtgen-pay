@@ -19,7 +19,7 @@
 * 
 * Author: Ashish Banerjee, ashish@bonbiz.in
 */
-package in.innomon.pay.impl;
+package in.qzip.pay.impl;
 
 import in.qzip.Globals;
 import in.qzip.pay.txn.AccountInfo;
