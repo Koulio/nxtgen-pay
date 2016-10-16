@@ -1,4 +1,14 @@
 = TODO
 
-* Publish as Maven Project
+* https://maven.apache.org/guides/mini/guide-central-repository-upload.html[Publish as Maven Project] 
 * Add Transaction chain
+* JWT
+* OTP Generator Plugin
+* TOTP Plugin
+
+== JWT Signer over JMS
+
+
+
+
+
