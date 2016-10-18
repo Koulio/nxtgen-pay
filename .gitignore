@@ -1,1 +1,3 @@
 **/target/
+/nxtgen-pay/aws-wallet/nbproject/
+/nxtgen-pay/qzip-wallet/nbproject/

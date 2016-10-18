@@ -6,7 +6,19 @@
 * OTP Generator Plugin
 * TOTP Plugin
 
+*BUG*: Gson can not deal with class inheritence correctly.
+
 == JWT Signer over JMS
+
+
+
+== Notes
+
+http://wiki.fasterxml.com/JacksonHome[Jackson JSON]
+
+https://github.com/FasterXML[Jackson Home]
+
+https://fasterxml.github.io/jackson-databind/javadoc/2.5/index.html[Jakson Java Doc]
 
 
 

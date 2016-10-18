@@ -6,4 +6,6 @@ This project uses core Java only; No Java EE EJB used. Rather,it uses generic be
 
 To assemble the beans, it uses https://github.com/qzip/atm/wiki/BDL:-Bean-Deployment-Language[BDL, Bean Deployment Language].
 
+*WORK IN PROGRESS*: Next Level of Overhaul for supporting Microservices and Cloud (including AWS Lambda).
+
 
