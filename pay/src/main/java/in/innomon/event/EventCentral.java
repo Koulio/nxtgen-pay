@@ -43,7 +43,7 @@ public class EventCentral implements Runnable {
     
     public static ExecutorService execServ = null;
  
-    public  static  Logger logger = Logger.getLogger("UPAY");
+    public  static  Logger logger = Logger.getLogger("QZip");
 
 
      
