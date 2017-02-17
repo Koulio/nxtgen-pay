@@ -1,0 +1,33 @@
+= Go Pay
+
+`pb` copies initially from my `txnchain` project.
+
+== Design
+
+.High Level
+. Multi Tanented
+. Multi Signed & Encrypted Txn and Block chain
+. Processes in BPM   
+
+.DB Design
+. BlockChain Table:(Sequence key, BlockChain Data, TimeStamp)
+. TxnChain:  (Txn UUID, TxnChain Data, TimeStamp)
+. UPI Address : 
+
+.UPI Address
+----
+UPI Address
+Account Status : Active, Dormant, Blocked
+Account UUID (TxnChain)
+Account Update TimeStamp
+Balance UUID (TxnChain)
+Balance Update TimeStamp
+----
+
+ 
+== Implementation
+
+Using https://github.com/jinzhu/gorm[Go ORM] and https://goa.design/[GOA API generator]
+
+https://www.cockroachlabs.com/[cockroachDB] for databse.  
+ 
